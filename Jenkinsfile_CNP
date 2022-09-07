@@ -1,0 +1,12 @@
+#!groovy
+
+//noinspection GroovyUnusedAssignment
+@Library("Infrastructure") _
+
+def product = 'sptribs'
+def branchesToSync = ['demo', 'perftest', 'ithc']
+
+withInfraPipeline(product) {
+  syncBranchesWithMaster(branchesToSync)
+  enableSlackNotifications('special-tribunals-builds')
+}
