@@ -108,7 +108,7 @@ data "azurerm_key_vault_secret" "alerts_email" {
 resource "azurerm_monitor_action_group" "appinsights" {
   name                = "sptribs-ag1"
   resource_group_name = azurerm_resource_group.rg.name
-  short_name          = "sptribs-alrt"
+  short_name          = "spt-alerts"
   email_receiver {
     name          = "sendtoadmin"
 //    email_address = data.azurerm_key_vault_secret.alerts_email.value

@@ -53,7 +53,7 @@ module "sptribs-fail-action-group-slack" {
 
   resourcegroup_name     = azurerm_resource_group.rg.name
   action_group_name      = "sptribs Fail Slack Alert - ${var.env}"
-  short_name             = "stribs_slck"
+  short_name             = "spt_slack"
   email_receiver_name    = "sptribs Alerts"
   email_receiver_address = "${data.azurerm_key_vault_secret.slack_monitoring_address.value}"
 }
