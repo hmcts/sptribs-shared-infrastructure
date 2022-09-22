@@ -80,6 +80,7 @@ resource "azurerm_key_vault_secret" "AZURE_APPINSIGHTS_KEY_PREVIEW" {
 #  key_vault_id = module.key-vault.key_vault_id
 #}
 
+
 resource "azurerm_application_insights" "appinsights_preview" {
   name                = "${var.product}-appinsights-preview"
   location            = var.appinsights_location
