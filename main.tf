@@ -128,8 +128,9 @@ resource "azurerm_monitor_action_group" "appinsights" {
   resource_group_name = azurerm_resource_group.rg.name
   scopes              = [azurerm_application_insights.appinsights.id]
   description         = "Alert will be triggered when Exceptions are more than 2 per 5 mins"
+  tags                = var.common_tags
 
-  criteria {
+    criteria {
     metric_namespace = "Microsoft.Insights/Components"
     metric_name      = "performanceCounters/exceptionsPerSecond"
     aggregation      = "Maximum"
