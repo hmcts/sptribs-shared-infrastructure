@@ -15,4 +15,4 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: dcd_sptribs
+  owner: DTS Special Tribunals
