@@ -147,49 +147,49 @@ resource "azurerm_monitor_action_group" "appinsights" {
 }
 
 #dss keys
-resource "definition-importer-username" "DEFINITION_IMPORTER_USERNAME" {
+resource "azurerm_key_vault_secret" "DEFINITION_IMPORTER_USERNAME" {
   name         = "definition-importer-username"
   value        = azurerm_application_insights.importerUsername.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
 }
 
-resource "definition-importer-password" "DEFINITION_IMPORTER_PASSWORD" {
+resource "azurerm_key_vault_secret" "DEFINITION_IMPORTER_PASSWORD" {
   name         = "definition-importer-password"
   value        = azurerm_application_insights.importerPassword.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
 }
 
-resource "idam-ui-secret" "OAUTH2_CLIENT_SECRET" {
+resource "azurerm_key_vault_secret" "OAUTH2_CLIENT_SECRET" {
   name         = "idam-ui-secret"
   value        = azurerm_application_insights.oauth2Client.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
 }
 
-resource "idam-solicitor-username" "IDAM_SOLICITOR_USERNAME" {
+resource "azurerm_key_vault_secret" "IDAM_SOLICITOR_USERNAME" {
   name         = "idam-solicitor-username"
   value        = azurerm_application_insights.idamSolUsername.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
 }
 
-resource "idam-solicitor-password" "IDAM_SOLICITOR_PASSWORD" {
+resource "azurerm_key_vault_secret" "IDAM_SOLICITOR_PASSWORD" {
   name         = "idam-solicitor-password"
   value        = azurerm_application_insights.idamSolicitorPassword.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
 }
 
-resource "idam-system-user-name" "IDAM_SYSTEM_UPDATE_USERNAME" {
+resource "azurerm_key_vault_secret" "IDAM_SYSTEM_UPDATE_USERNAME" {
   name         = "idam-system-user-name"
   value        = azurerm_application_insights.idamSystemUpdateUsername.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
 }
 
-resource "idam-system-user-password" "IDAM_SYSTEM_UPDATE_PASSWORD" {
+resource "azurerm_key_vault_secret" "IDAM_SYSTEM_UPDATE_PASSWORD" {
   name         = "idam-system-user-password"
   value        = azurerm_application_insights.idamSystemUpdatePassword.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
 }
 
-resource "s2s-secret-sptribs-dss-backend" "S2S_SECRET" {
+resource "azurerm_key_vault_secret" "S2S_SECRET" {
   name         = "s2s-secret-sptribs-dss-backend"
   value        = azurerm_application_insights.s2sSecret.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
