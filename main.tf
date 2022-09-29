@@ -145,3 +145,52 @@ resource "azurerm_monitor_action_group" "appinsights" {
   }
   count = var.custom_alerts_enabled ? 1 : 0  
 }
+
+#dss keys
+resource "definition-importer-username" "DEFINITION_IMPORTER_USERNAME" {
+  name         = "AppInsightsInstrumentationKey"
+  value        = azurerm_application_insights.appinsights.instrumentation_key
+  key_vault_id = module.key-vault.key_vault_id
+}
+
+resource "definition-importer-password" "DEFINITION_IMPORTER_PASSWORD" {
+  name         = "AppInsightsInstrumentationKey"
+  value        = azurerm_application_insights.appinsights.instrumentation_key
+  key_vault_id = module.key-vault.key_vault_id
+}
+
+resource "idam-ui-secret" "OAUTH2_CLIENT_SECRET" {
+  name         = "AppInsightsInstrumentationKey"
+  value        = azurerm_application_insights.appinsights.instrumentation_key
+  key_vault_id = module.key-vault.key_vault_id
+}
+
+resource "idam-solicitor-username" "IDAM_SOLICITOR_USERNAME" {
+  name         = "AppInsightsInstrumentationKey"
+  value        = azurerm_application_insights.appinsights.instrumentation_key
+  key_vault_id = module.key-vault.key_vault_id
+}
+
+resource "idam-solicitor-password" "IDAM_SOLICITOR_PASSWORD" {
+  name         = "AppInsightsInstrumentationKey"
+  value        = azurerm_application_insights.appinsights.instrumentation_key
+  key_vault_id = module.key-vault.key_vault_id
+}
+
+resource "idam-system-user-name" "IDAM_SYSTEM_UPDATE_USERNAME" {
+  name         = "AppInsightsInstrumentationKey"
+  value        = azurerm_application_insights.appinsights.instrumentation_key
+  key_vault_id = module.key-vault.key_vault_id
+}
+
+resource "idam-system-user-password" "IDAM_SYSTEM_UPDATE_PASSWORD" {
+  name         = "AppInsightsInstrumentationKey"
+  value        = azurerm_application_insights.appinsights.instrumentation_key
+  key_vault_id = module.key-vault.key_vault_id
+}
+
+resource "s2s-secret-sptribs-dss-backend" "S2S_SECRET" {
+  name         = "AppInsightsInstrumentationKey"
+  value        = azurerm_application_insights.appinsights.instrumentation_key
+  key_vault_id = module.key-vault.key_vault_id
+}
