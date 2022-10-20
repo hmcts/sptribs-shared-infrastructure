@@ -1,4 +1,4 @@
-provider azurerm {
+provider "azurerm" {
   features {}
 }
 
@@ -18,15 +18,20 @@ module "key-vault" {
   resource_group_name = azurerm_resource_group.rg.name
 
   # dcd_platformengineering group object ID
-  product_group_name = "DTS Special Tribunals"
-  common_tags                = var.common_tags
-  create_managed_identity    = true
+  product_group_name      = "DTS Special Tribunals"
+  common_tags             = var.common_tags
+  create_managed_identity = true
 }
 
 resource "azurerm_key_vault_secret" "AZURE_APPINSIGHTS_KEY" {
   name         = "AppInsightsInstrumentationKey"
   value        = azurerm_application_insights.appinsights.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
+
+  content_type = "terraform-managed"
+  tags = merge(var.common_tags, {
+    "source" : "App Insights ${azurerm_application_insights.appinsights.name}"
+  })
 }
 
 resource "azurerm_application_insights" "appinsights" {
@@ -50,7 +55,12 @@ resource "azurerm_key_vault_secret" "AZURE_APPINSIGHTS_KEY_PREVIEW" {
   name         = "AppInsightsInstrumentationKey-Preview"
   value        = azurerm_application_insights.appinsights_preview[0].instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
-  count = var.env == "aat" ? 1 : 0
+  count        = var.env == "aat" ? 1 : 0
+
+  content_type = "terraform-managed"
+  tags = merge(var.common_tags, {
+    "source" : "App Insights ${azurerm_application_insights.appinsights_preview[0].name}"
+  })
 }
 
 #data "azurerm_key_vault" "s2s_vault" {
@@ -86,7 +96,7 @@ resource "azurerm_application_insights" "appinsights_preview" {
   location            = var.appinsights_location
   resource_group_name = azurerm_resource_group.rg.name
   application_type    = "web"
-  count = var.env == "aat" ? 1 : 0
+  count               = var.env == "aat" ? 1 : 0
 
   tags = var.common_tags
 
@@ -111,8 +121,8 @@ resource "azurerm_monitor_action_group" "appinsights" {
   resource_group_name = azurerm_resource_group.rg.name
   short_name          = "spt-alerts"
   email_receiver {
-    name          = "sendtoadmin"
-//    email_address = data.azurerm_key_vault_secret.alerts_email.value
+    name = "sendtoadmin"
+    //    email_address = data.azurerm_key_vault_secret.alerts_email.value
     email_address = "div-support2@HMCTS.NET"
 
   }
@@ -124,14 +134,14 @@ resource "azurerm_monitor_action_group" "appinsights" {
   }
 }
 
-  resource "azurerm_monitor_metric_alert" "metric_alert_exceptions" {
+resource "azurerm_monitor_metric_alert" "metric_alert_exceptions" {
   name                = "exceptions_alert"
   resource_group_name = azurerm_resource_group.rg.name
   scopes              = [azurerm_application_insights.appinsights.id]
   description         = "Alert will be triggered when Exceptions are more than 2 per 5 mins"
   tags                = var.common_tags
 
-    criteria {
+  criteria {
     metric_namespace = "Microsoft.Insights/Components"
     metric_name      = "performanceCounters/exceptionsPerSecond"
     aggregation      = "Maximum"
@@ -143,5 +153,5 @@ resource "azurerm_monitor_action_group" "appinsights" {
   action {
     action_group_id = azurerm_monitor_action_group.appinsights.id
   }
-  count = var.custom_alerts_enabled ? 1 : 0  
+  count = var.custom_alerts_enabled ? 1 : 0
 }
