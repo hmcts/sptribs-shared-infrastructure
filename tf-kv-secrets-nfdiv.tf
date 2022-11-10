@@ -1,6 +1,6 @@
 data "azurerm_key_vault" "nfdiv_vault" {
   name                = "nfdiv-${var.env}"
-  resource_group_name = "nfdiv-shared-${var.env}"
+  resource_group_name = "nfdiv-${var.env}"
 }
 
 locals {
