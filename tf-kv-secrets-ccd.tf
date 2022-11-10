@@ -15,7 +15,7 @@ resource "azurerm_key_vault_secret" "ccd_importer_username" {
 
   content_type = "terraform-managed"
   tags = merge(var.common_tags, {
-    "source" : "Vault ${azurerm_key_vault.ccd_vault.name}"
+    "source" : "Vault ${data.azurerm_key_vault.ccd_vault.name}"
   })
 }
 
@@ -31,6 +31,6 @@ resource "azurerm_key_vault_secret" "ccd_importer_password" {
 
   content_type = "terraform-managed"
   tags = merge(var.common_tags, {
-    "source" : "Vault ${azurerm_key_vault.ccd_vault.name}"
+    "source" : "Vault ${data.azurerm_key_vault.ccd_vault.name}"
   })
 }
