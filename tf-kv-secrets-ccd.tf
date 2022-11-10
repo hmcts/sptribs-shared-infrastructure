@@ -10,7 +10,7 @@ data "azurerm_key_vault_secret" "ccd_importer_username" {
 }
 resource "azurerm_key_vault_secret" "ccd_importer_username" {
   name         = "definition-importer-username"
-  value        = azurerm_key_vault_secret.ccd_importer_username.value
+  value        = data.azurerm_key_vault_secret.ccd_importer_username.value
   key_vault_id = module.key-vault.key_vault_id
 
   content_type = "terraform-managed"
@@ -26,7 +26,7 @@ data "azurerm_key_vault_secret" "ccd_importer_password" {
 }
 resource "azurerm_key_vault_secret" "ccd_importer_password" {
   name         = "definition-importer-password"
-  value        = azurerm_key_vault_secret.ccd_importer_password.value
+  value        = data.azurerm_key_vault_secret.ccd_importer_password.value
   key_vault_id = module.key-vault.key_vault_id
 
   content_type = "terraform-managed"
