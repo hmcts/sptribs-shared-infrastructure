@@ -16,7 +16,7 @@ resource "azurerm_application_insights" "appinsights" {
 }
 
 resource "azurerm_key_vault_secret" "appinsights_key" {
-  name         = "AppInsightsInstrumentationKey"
+  name         = "app-insights-instrumentation-key"
   value        = azurerm_application_insights.appinsights.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
 
@@ -27,7 +27,7 @@ resource "azurerm_key_vault_secret" "appinsights_key" {
 }
 
 resource "azurerm_key_vault_secret" "appinsights_connection_string" {
-  name         = "AppInsightsConnectionString"
+  name         = "app-insights-connection-string"
   value        = azurerm_application_insights.appinsights.connection_string
   key_vault_id = module.key-vault.key_vault_id
 
@@ -59,7 +59,7 @@ resource "azurerm_application_insights" "appinsights_preview" {
 resource "azurerm_key_vault_secret" "appinsights_preview_key" {
   count = var.env == "aat" ? 1 : 0
 
-  name  = "AppInsightsInstrumentationKey-Preview"
+  name  = "app-insights-instrumentation-key-preview"
   value = azurerm_application_insights.appinsights_preview[0].instrumentation_key
 
   key_vault_id = module.key-vault.key_vault_id
@@ -73,7 +73,7 @@ resource "azurerm_key_vault_secret" "appinsights_preview_key" {
 resource "azurerm_key_vault_secret" "appinsights_preview_connection_string" {
   count = var.env == "aat" ? 1 : 0
 
-  name         = "AppInsightsConnectionString-Preview"
+  name         = "app-insights-connection-string-preview"
   value        = azurerm_application_insights.appinsights_preview[0].connection_string
   key_vault_id = module.key-vault.key_vault_id
 
