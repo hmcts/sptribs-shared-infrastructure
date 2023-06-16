@@ -12,31 +12,23 @@ module "key-vault" {
   create_managed_identity = true
 }
 
+data "azurerm_key_vault" "key_vault" {
+  name                = "${var.product}-${var.env}"
+  resource_group_name = "${var.product}-${var.env}"
+}
 
+data "azurerm_key_vault" "s2s_vault" {
+  name                = "s2s-${var.env}"
+  resource_group_name = "rpe-service-auth-provider-${var.env}"
+}
 
-#data "azurerm_key_vault" "s2s_vault" {
-#  name                = "s2s-${var.env}"
-#  resource_group_name = "rpe-service-auth-provider-${var.env}"
-#}
-#
-#data "azurerm_key_vault_secret" "sptribs_case_api_s2s_key" {
-#  name         = "microservicekey-sptribs-case-api"
-#  key_vault_id = data.azurerm_key_vault.s2s_vault.id
-#}
-#
-#resource "azurerm_key_vault_secret" "sptribs_case_api_s2s_secret" {
-#  name         = "s2s-case-api-secret"
-#  value        = data.azurerm_key_vault_secret.sptribs_case_api_s2s_key.value
-#  key_vault_id = module.key-vault.key_vault_id
-#}
-#
-#data "azurerm_key_vault_secret" "sptribs_frontend_s2s_key" {
-#  name         = "microservicekey-sptribs-frontend"
-#  key_vault_id = data.azurerm_key_vault.s2s_vault.id
-#}
-#
-#resource "azurerm_key_vault_secret" "sptribs_frontend_s2s_secret" {
-#  name         = "frontend-secret"
-#  value        = data.azurerm_key_vault_secret.sptribs_frontend_s2s_key.value
-#  key_vault_id = module.key-vault.key_vault_id
-#}
+data "azurerm_key_vault_secret" "key_from_vault" {
+  name         = "microservicekey-sptribs-case-api"
+  key_vault_id = data.azurerm_key_vault.s2s_vault.id
+}
+
+resource "azurerm_key_vault_secret" "s2s" {
+  name         = "s2s-case-api-secret"
+  value        = data.azurerm_key_vault_secret.key_from_vault.value
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
