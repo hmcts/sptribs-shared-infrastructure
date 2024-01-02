@@ -20,7 +20,7 @@ resource "azurerm_monitor_action_group" "appinsights" {
 resource "azurerm_monitor_metric_alert" "metric_alert_exceptions" {
   name                = "exceptions_alert"
   resource_group_name = azurerm_resource_group.rg.name
-  scopes              = [azurerm_application_insights.appinsights.id]
+  scopes              = [module.application_insights.app_id]
   description         = "Alert will be triggered when Exceptions are more than 2 per 5 mins"
   tags                = var.common_tags
 
