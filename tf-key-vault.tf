@@ -35,7 +35,7 @@ resource "azurerm_key_vault_secret" "s2s" {
 
 data "azurerm_key_vault" "civil_vault" {
   name                = "civil-${var.env}"
-  resource_group_name = "civil-${var.env}"
+  resource_group_name = "civil-service-${var.env}"
 }
 
 data "azurerm_key_vault_secret" "ccd_importer_username_civil" {
