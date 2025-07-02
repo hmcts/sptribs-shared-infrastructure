@@ -32,3 +32,30 @@ resource "azurerm_key_vault_secret" "s2s" {
   value        = data.azurerm_key_vault_secret.key_from_vault.value
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
+
+data "azurerm_key_vault" "civil_vault" {
+  name                = "civil-${var.env}"
+  resource_group_name = "civil-${var.env}"
+}
+
+data "azurerm_key_vault_secret" "ccd_importer_username_civil" {
+  name         = "ccd-importer-username"
+  key_vault_id = data.azurerm_key_vault.civil_vault.id
+}
+
+data "azurerm_key_vault_secret" "ccd_importer_password_civil" {
+  name         = "ccd-importer-password"
+  key_vault_id = data.azurerm_key_vault.civil_vault.id
+}
+
+resource "azurerm_key_vault_secret" "ccd_importer_username_sptribs" {
+  name         = "ccd-importer-username"
+  value        = data.azurerm_key_vault_secret.ccd_importer_username_civil.value
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "ccd_importer_password_sptribs" {
+  name         = "ccd-importer-password"
+  value        = data.azurerm_key_vault_secret.ccd_importer_password_civil.value
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
