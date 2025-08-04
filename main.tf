@@ -30,7 +30,7 @@ module "db-v15" {
 
   pgsql_databases = [
     {
-      name    = var.database-name
+      name = var.database-name
     }
   ]
   pgsql_server_configuration = [
@@ -40,8 +40,8 @@ module "db-v15" {
     }
   ]
 
-  pgsql_sku            = var.pgsql_sku
-  pgsql_storage_mb     = var.pgsql_storage_mb
+  pgsql_sku                      = var.pgsql_sku
+  pgsql_storage_mb               = var.pgsql_storage_mb
   force_user_permissions_trigger = "1"
 }
 
