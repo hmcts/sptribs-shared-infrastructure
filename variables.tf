@@ -45,5 +45,5 @@ variable "pgsql_storage_mb" {
 variable "component" {}
 
 variable "database-name" {
-  default = "cmc"
+  default = "sptribs"
 }
