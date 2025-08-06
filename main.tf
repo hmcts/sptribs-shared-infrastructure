@@ -4,7 +4,7 @@ provider "azurerm" {
       purge_soft_delete_on_destroy = true
     }
   }
-  alias                      = "cft_vnet"
+  alias = "cft_vnet"
 }
 
 resource "azurerm_resource_group" "rg" {
