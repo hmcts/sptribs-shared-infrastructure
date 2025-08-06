@@ -4,7 +4,11 @@ provider "azurerm" {
       purge_soft_delete_on_destroy = true
     }
   }
+}
+
+provider "azurerm" {
   alias = "cft_vnet"
+  subscription_id            = var.aks_subscription_id
 }
 
 resource "azurerm_resource_group" "rg" {

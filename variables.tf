@@ -47,3 +47,5 @@ variable "component" {}
 variable "database-name" {
   default = "sptribs"
 }
+
+variable "aks_subscription_id" {}
