@@ -8,8 +8,8 @@ provider "azurerm" {
 
 provider "azurerm" {
   features {}
-  alias = "cft_vnet"
-  subscription_id            = var.aks_subscription_id
+  alias           = "cft_vnet"
+  subscription_id = var.aks_subscription_id
 }
 
 resource "azurerm_resource_group" "rg" {
