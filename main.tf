@@ -50,6 +50,8 @@ module "db-v15" {
   pgsql_sku                      = var.pgsql_sku
   pgsql_storage_mb               = var.pgsql_storage_mb
   force_user_permissions_trigger = "1"
+  user_secret_name = azurerm_key_vault_secret.POSTGRES-USER.name
+  pass_secret_name = azurerm_key_vault_secret.POSTGRES-PASS.name
 }
 
 
