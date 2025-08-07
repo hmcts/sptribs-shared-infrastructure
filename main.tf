@@ -8,7 +8,7 @@ provider "azurerm" {
 
 provider "azurerm" {
   features {}
-  alias           = "cft_vnet"
+  alias           = "sptribs_vnet"
   subscription_id = var.aks_subscription_id
 }
 
@@ -21,7 +21,7 @@ resource "azurerm_resource_group" "rg" {
 # FlexiServer v15
 module "db-v15" {
   providers = {
-    azurerm.postgres_network = azurerm.cft_vnet
+    azurerm.postgres_network = azurerm.sptribs_vnet
   }
 
   source               = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=master"
