@@ -59,3 +59,15 @@ resource "azurerm_key_vault_secret" "ccd_importer_password_sptribs" {
   value        = data.azurerm_key_vault_secret.ccd_importer_password_civil.value
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
+
+resource "azurerm_key_vault_secret" "POSTGRES-USER" {
+  name         = join("-", [var.product, "POSTGRES-USER"])
+  value        = module.db-v15.username
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
+  name         = join("-", [var.product, "POSTGRES-PASS"])
+  value        = module.db-v15.password
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
