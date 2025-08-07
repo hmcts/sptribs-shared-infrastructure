@@ -27,12 +27,13 @@ module "db-v15" {
   source               = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=master"
   admin_user_object_id = var.jenkins_AAD_objectId
   business_area        = "CFT"
-  name                 = "sptribs-db-v15"
+  name                 = "${var.product}-${var.env}-flexible-db-v15"
   product              = var.product
   env                  = var.env
   component            = var.component
   common_tags          = var.common_tags
   pgsql_version        = 15
+  auto_grow_enabled    = true
 
   pgsql_databases = [
     {
