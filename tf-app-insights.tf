@@ -1,5 +1,5 @@
 module "application_insights" {
-  source = "git@github.com:hmcts/terraform-module-application-insights?ref=main"
+  source = "git@github.com:hmcts/terraform-module-application-insights?ref=4.x"
 
   env                 = var.env
   product             = var.product
@@ -40,7 +40,7 @@ resource "azurerm_key_vault_secret" "appinsights_connection_string" {
 
 module "application_insights_preview" {
   count  = var.env == "aat" ? 1 : 0
-  source = "git@github.com:hmcts/terraform-module-application-insights?ref=main"
+  source = "git@github.com:hmcts/terraform-module-application-insights?ref=4.x"
 
   env                 = "preview"
   product             = var.product
