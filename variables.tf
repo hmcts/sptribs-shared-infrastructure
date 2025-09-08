@@ -33,7 +33,7 @@ variable "custom_alerts_enabled" {
 
 variable "pgsql_sku" {
   description = "The PGSql flexible server instance sku"
-  default     = "GP_Standard_D2s_v3"
+  default     = "GP_Standard_D2ds_v4"
 }
 
 variable "pgsql_storage_mb" {
@@ -49,3 +49,7 @@ variable "database-name" {
 }
 
 variable "aks_subscription_id" {}
+
+variable "postgres_geo_redundant_backups" {
+  default = false
+}

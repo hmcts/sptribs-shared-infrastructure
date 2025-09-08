@@ -38,12 +38,14 @@ module "db-v15" {
   pgsql_databases = [
     {
       name = var.database-name
+      report_privilege_schema : "public"
+      report_privilege_tables : ["case_data", "case_event"]
     }
   ]
   pgsql_server_configuration = [
     {
       name  = "azure.extensions"
-      value = "plpgsql,pg_stat_statements,pg_buffercache"
+      value = "pg_stat_statements,pg_buffercache"
     }
   ]
 
