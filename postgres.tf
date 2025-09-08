@@ -4,14 +4,14 @@ module "postgresql" {
     azurerm.postgres_network = azurerm.postgres_network
   }
 
-  source = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=master"
-  name                 = "${var.product}-${var.env}-flexible-db-v15"
-  business_area        = "CFT"
-  product              = var.product
-  env                  = var.env
-  component            = var.component
-  common_tags          = var.common_tags
-  auto_grow_enabled    = true
+  source            = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=master"
+  name              = "${var.product}-${var.env}-flexible-db-v15"
+  business_area     = "CFT"
+  product           = var.product
+  env               = var.env
+  component         = var.component
+  common_tags       = var.common_tags
+  auto_grow_enabled = true
 
   # The original subnet is full, this is required to use the new subnet for new databases
   subnet_suffix = "expanded"
@@ -22,9 +22,9 @@ module "postgresql" {
     }
   ]
 
-  pgsql_sku     = var.pgsql_sku
-  pgsql_storage_mb               = var.pgsql_storage_mb
-  pgsql_version = "16"
+  pgsql_sku             = var.pgsql_sku
+  pgsql_storage_mb      = var.pgsql_storage_mb
+  pgsql_version         = "16"
   geo_redundant_backups = var.postgres_geo_redundant_backups
 
   force_user_permissions_trigger = "1"
