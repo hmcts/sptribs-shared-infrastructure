@@ -65,6 +65,18 @@ resource "azurerm_key_vault_secret" "ccd_importer_password_sptribs" {
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
+resource "azurerm_key_vault_secret" "POSTGRES-USER" {
+  name         = join("-", [var.product, "POSTGRES-USER"])
+  value        = module.db-v15.username
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
+  name         = join("-", [var.product, "POSTGRES-PASS"])
+  value        = module.db-v15.password
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
 data "azurerm_key_vault_secret" "docmosis_access_key" {
   key_vault_id = data.azurerm_key_vault.em_key_vault.id
   name         = "docmosis-access-key"
