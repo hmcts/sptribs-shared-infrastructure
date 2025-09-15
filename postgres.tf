@@ -52,7 +52,7 @@ module "postgresql" {
 
   pgsql_sku             = var.pgsql_sku
   pgsql_storage_mb      = var.pgsql_storage_mb
-  pgsql_version         = "16"
+  pgsql_version         = "17"
   geo_redundant_backups = var.postgres_geo_redundant_backups
 
   force_user_permissions_trigger = "1"
