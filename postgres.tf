@@ -18,8 +18,36 @@ module "postgresql" {
 
   pgsql_databases = [
     {
-      name : var.database-name
+      name = var.database-name
+      report_privilege_schema : "public"
+      report_privilege_tables : ["case_data", "case_event"]
     }
+  ]
+  pgsql_server_configuration = [
+    {
+      name  = "azure.extensions"
+      value = "pg_stat_statements,pg_buffercache"
+    },
+    {
+      name  = "log_lock_waits"
+      value = "on"
+    },
+    {
+      name  = "pg_qs.query_capture_mode"
+      value = "ALL"
+    },
+    {
+      name  = "pgms_wait_sampling.query_capture_mode"
+      value = "ALL"
+    },
+    {
+      name  = "logfiles.download_enable"
+      value = "ON"
+    },
+    {
+      name  = "logfiles.retention_days"
+      value = "14"
+    },
   ]
 
   pgsql_sku             = var.pgsql_sku
