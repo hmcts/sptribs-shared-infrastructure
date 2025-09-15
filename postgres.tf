@@ -59,9 +59,6 @@ module "postgresql" {
   user_secret_name               = azurerm_key_vault_secret.POSTGRES-USER.name
   pass_secret_name               = azurerm_key_vault_secret.POSTGRES-PASS.name
 
-  # Changing the value of the trigger_password_reset variable will trigger Terraform to rotate the password of the pgadmin user.
-  trigger_password_reset = "1"
-
   # The ID of the principal to be granted admin access to the database server.
   # On Jenkins it will be injected for you automatically as jenkins_AAD_objectId.
   # Otherwise change the below:
