@@ -73,7 +73,7 @@ resource "azurerm_key_vault_secret" "POSTGRES-USER" {
 
 resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
   name         = join("-", [var.product, "POSTGRES-PASS"])
-  value        = module.postgresql.password
+  value        = random_password.master.result
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 

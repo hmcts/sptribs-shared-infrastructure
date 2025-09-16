@@ -18,5 +18,9 @@ resource "azurerm_resource_group" "rg" {
   tags     = var.common_tags
 }
 
-
+resource "random_password" "master" {
+  length           = 16
+  special          = true
+  override_special = "_!%^"
+}
 
