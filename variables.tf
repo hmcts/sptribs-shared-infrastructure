@@ -30,3 +30,26 @@ variable "custom_alerts_enabled" {
   description = "If set to true, enable alerts"
   default     = false
 }
+
+variable "pgsql_sku" {
+  description = "The PGSql flexible server instance sku"
+  default     = "GP_Standard_D2ds_v4"
+}
+
+variable "pgsql_storage_mb" {
+  description = "Max storage allowed for the PGSql Flexibile instance"
+  type        = number
+  default     = 65536
+}
+
+variable "component" {}
+
+variable "database-name" {
+  default = "sptribs"
+}
+
+variable "aks_subscription_id" {}
+
+variable "postgres_geo_redundant_backups" {
+  default = false
+}
