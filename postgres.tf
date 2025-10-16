@@ -46,7 +46,7 @@ module "postgresql" {
     },
     {
       name  = "logfiles.retention_days"
-      value = "14"
+      value = "7"
     },
   ]
 
