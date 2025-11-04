@@ -2,4 +2,4 @@
 custom_alerts_enabled = "true"
 
 postgres_geo_redundant_backups = true
-enable_read_only_group_access  = false
+enable_read_only_group_access  = true
