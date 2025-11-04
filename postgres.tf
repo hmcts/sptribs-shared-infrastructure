@@ -19,8 +19,6 @@ module "postgresql" {
   pgsql_databases = [
     {
       name = var.database-name
-      report_privilege_schema : "public"
-      report_privilege_tables : ["case_data", "case_event"]
     }
   ]
   pgsql_server_configuration = [
@@ -55,7 +53,7 @@ module "postgresql" {
   pgsql_version         = "16"
   geo_redundant_backups = var.postgres_geo_redundant_backups
 
-  force_user_permissions_trigger = "1"
+  force_user_permissions_trigger = "2"
   user_secret_name               = azurerm_key_vault_secret.POSTGRES-USER.name
   pass_secret_name               = azurerm_key_vault_secret.POSTGRES-PASS.name
 
