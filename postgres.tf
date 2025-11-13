@@ -18,7 +18,8 @@ module "postgresql" {
 
   pgsql_databases = [
     {
-      name = var.database-name
+      name                      = var.database-name
+      schemas_for_reader_access = ["public", "ccd"]
     }
   ]
   pgsql_server_configuration = [
