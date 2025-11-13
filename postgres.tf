@@ -54,7 +54,7 @@ module "postgresql" {
   pgsql_version         = "16"
   geo_redundant_backups = var.postgres_geo_redundant_backups
 
-  force_user_permissions_trigger = "2"
+  force_user_permissions_trigger = "3"
   user_secret_name               = azurerm_key_vault_secret.POSTGRES-USER.name
   pass_secret_name               = azurerm_key_vault_secret.POSTGRES-PASS.name
 
