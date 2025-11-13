@@ -4,7 +4,7 @@ module "postgresql" {
     azurerm.postgres_network = azurerm.postgres_network
   }
 
-  source            = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=custom-schema-support"
+  source            = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=master"
   name              = "${var.product}-${var.env}-flexible-db-v15"
   business_area     = "CFT"
   product           = var.product
