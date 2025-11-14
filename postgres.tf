@@ -57,6 +57,7 @@ module "postgresql" {
   force_user_permissions_trigger = "3"
   user_secret_name               = azurerm_key_vault_secret.POSTGRES-USER.name
   pass_secret_name               = azurerm_key_vault_secret.POSTGRES-PASS.name
+  enable_read_only_group_access  = false
 
   # The ID of the principal to be granted admin access to the database server.
   # On Jenkins it will be injected for you automatically as jenkins_AAD_objectId.
