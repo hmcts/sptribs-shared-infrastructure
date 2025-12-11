@@ -39,7 +39,7 @@ data "azurerm_key_vault" "em_key_vault" {
 }
 
 data "azurerm_key_vault" "ccd_key_vault" {
-  name = "ccd-shared-${var.env}"
+  name = "ccd-${var.env}"
   resource_group_name = "ccd-shared-${var.env}"
 }
 
