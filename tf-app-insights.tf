@@ -16,6 +16,7 @@ moved {
 }
 
 resource "azurerm_key_vault_secret" "appinsights_key" {
+  count        = var.env != "ithc" ? 1 : 0
   name         = "app-insights-instrumentation-key"
   value        = module.application_insights.instrumentation_key
   key_vault_id = module.key-vault.key_vault_id
@@ -27,6 +28,7 @@ resource "azurerm_key_vault_secret" "appinsights_key" {
 }
 
 resource "azurerm_key_vault_secret" "appinsights_connection_string" {
+  count        = var.env != "ithc" ? 1 : 0
   name         = "app-insights-connection-string"
   value        = module.application_insights.connection_string
   key_vault_id = module.key-vault.key_vault_id
