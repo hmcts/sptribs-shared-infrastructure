@@ -18,9 +18,8 @@ module "postgresql" {
 
   pgsql_databases = [
     {
-      name = var.database-name
-      report_privilege_schema : "public"
-      report_privilege_tables : ["case_data", "case_event"]
+      name                      = var.database-name
+      schemas_for_reader_access = ["public", "ccd"]
     }
   ]
   pgsql_server_configuration = [
@@ -46,7 +45,7 @@ module "postgresql" {
     },
     {
       name  = "logfiles.retention_days"
-      value = "14"
+      value = "7"
     },
   ]
 
@@ -55,7 +54,7 @@ module "postgresql" {
   pgsql_version         = "16"
   geo_redundant_backups = var.postgres_geo_redundant_backups
 
-  force_user_permissions_trigger = "1"
+  force_user_permissions_trigger = "3"
   user_secret_name               = azurerm_key_vault_secret.POSTGRES-USER.name
   pass_secret_name               = azurerm_key_vault_secret.POSTGRES-PASS.name
 
