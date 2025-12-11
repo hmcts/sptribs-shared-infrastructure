@@ -34,6 +34,7 @@ resource "azurerm_key_vault_secret" "s2s" {
 }
 
 data "azurerm_key_vault" "civil_vault" {
+  count               = var.env != "ithc" ? 1 : 0
   name                = "civil-${var.env}"
   resource_group_name = "civil-service-${var.env}"
 }
@@ -44,24 +45,28 @@ data "azurerm_key_vault" "em_key_vault" {
 }
 
 data "azurerm_key_vault_secret" "ccd_importer_username_civil" {
+  count        = var.env != "ithc" ? 1 : 0
   name         = "ccd-importer-username"
-  key_vault_id = data.azurerm_key_vault.civil_vault.id
+  key_vault_id = data.azurerm_key_vault.civil_vault[0].id
 }
 
 data "azurerm_key_vault_secret" "ccd_importer_password_civil" {
+  count        = var.env != "ithc" ? 1 : 0
   name         = "ccd-importer-password"
-  key_vault_id = data.azurerm_key_vault.civil_vault.id
+  key_vault_id = data.azurerm_key_vault.civil_vault[0].id
 }
 
 resource "azurerm_key_vault_secret" "ccd_importer_username_sptribs" {
+  count        = var.env != "ithc" ? 1 : 0
   name         = "ccd-importer-username"
-  value        = data.azurerm_key_vault_secret.ccd_importer_username_civil.value
+  value        = data.azurerm_key_vault_secret.ccd_importer_username_civil[0].value
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
 resource "azurerm_key_vault_secret" "ccd_importer_password_sptribs" {
+  count        = var.env != "ithc" ? 1 : 0
   name         = "ccd-importer-password"
-  value        = data.azurerm_key_vault_secret.ccd_importer_password_civil.value
+  value        = data.azurerm_key_vault_secret.ccd_importer_password_civil[0].value
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
