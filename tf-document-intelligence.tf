@@ -17,7 +17,7 @@
 module "document_intelligence" {
   count = var.env == "aat" ? 1 : 0
 
-  source = "github.com/hmcts/terraform-module-ai-services?ref=main"
+  source = "git@github.com:hmcts/terraform-module-ai-services?ref=main"
 
   providers = {
     azurerm.private_dns = azurerm # required alias; unused since enable_managed_network = false skips all PE/DNS lookups
