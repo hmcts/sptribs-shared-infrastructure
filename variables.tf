@@ -53,3 +53,9 @@ variable "aks_subscription_id" {}
 variable "postgres_geo_redundant_backups" {
   default = false
 }
+
+variable "document_intelligence_sku" {
+  description = "SKU of the Document Intelligence (FormRecognizer) cognitive account. S0 is the paid standard tier; F0 is free but limited to the first 2 pages of a PDF."
+  type        = string
+  default     = "S0"
+}
