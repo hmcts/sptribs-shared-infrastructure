@@ -1,11 +1,12 @@
 module "key-vault" {
-  source              = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  product             = var.product
-  env                 = var.env
-  tenant_id           = var.tenant_id
-  object_id           = var.jenkins_AAD_objectId
-  resource_group_name = azurerm_resource_group.rg.name
-  jenkins_object_id   = data.azurerm_user_assigned_identity.jenkins.principal_id
+  source                       = "git@github.com:hmcts/cnp-module-key-vault?ref=DTSPO-31965/remove-jenkins-ptl-access"
+  grant_preview_jenkins_access = var.env == "aat"
+  product                      = var.product
+  env                          = var.env
+  tenant_id                    = var.tenant_id
+  object_id                    = var.jenkins_AAD_objectId
+  resource_group_name          = azurerm_resource_group.rg.name
+  jenkins_object_id            = data.azurerm_user_assigned_identity.jenkins.principal_id
 
   # dcd_platformengineering group object ID
   product_group_name      = "DTS Special Tribunals"
